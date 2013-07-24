@@ -1,0 +1,14 @@
+{
+	"name": "Libra",
+	"description": "",
+	"author": "Joshua Chavez <josh@findjosh.com>",
+	"version": "0.0.1",
+	"dependencies": {
+		"express": "2.5.2"
+	},
+	"license":"MIT",
+	"scripts":{
+		"start":"node server.js"
+	},
+	"engine": "node >= 0.6.6"
+}
