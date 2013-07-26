@@ -1,3 +1,5 @@
+var config = require("./config")
+
 var express = require('express');
 var io = require('socket.io');
 var app = express.createServer()
@@ -7,11 +9,12 @@ var app = express.createServer()
 var path = require('path'),
     nexpect = require('nexpect');
 
-nexpect.spawn("meteor", { cwd:"/root/projects/CanVerse"})
-       .run(function (err) {
-         if (!err) {
-           console.log('two prompts were waited and responded to');
-         }
+nexpect.spawn(config.startup[0].command, { cwd:config.startup[0].cwd})
+       .run(function (err, out) {
+        
+           console.log(err);
+           console.log(out);
+         
 });
 
 
