@@ -4,7 +4,11 @@
 	"author": "Joshua Chavez <josh@findjosh.com>",
 	"version": "0.0.1",
 	"dependencies": {
-		"express": "2.5.2"
+		"express":"2.5.2",
+		"fibers":"1.0.1",
+		"socket.io":"0.9.16",
+		"supervisor":"0.5.3",
+		"nexpect":"0.2.4"
 	},
 	"license":"MIT",
 	"scripts":{
