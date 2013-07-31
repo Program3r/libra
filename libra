@@ -1,0 +1,20 @@
+#!/bin/sh
+#/etc/init.d/libra
+
+export PATH=$PATH:/usr/local/bin
+export NODE_PATH=$NODE_PATH:/root/local/libra
+
+case "$1" in
+  start)
+  forever --sourceDir=/root/local/libra -p /root/local/libra server.js --quiet &
+  ;;
+stop)
+  forever stop --sourceDir=/root/local/libra server.js --quiet &
+  ;;
+*)
+  echo "Usage: /etc/init.d/libra {start|stop}"
+  exit 1
+  ;;
+esac
+
+exit 0

@@ -9,14 +9,10 @@ var app = express.createServer()
 var path = require('path'),
     nexpect = require('nexpect');
 
-nexpect.spawn(config.startup[0].command, { cwd:config.startup[0].cwd})
-       .run(function (err, out) {
-        
-           console.log(err);
-           console.log(out);
-         
-});
-
+for(i=0;i<config.startup.length;i++){
+    nexpect.spawn(config.startup[i].command, { cwd:config.startup[i].cwd}).run(function (err, out) {  
+    });
+}
 
 app.use('/lib', express.static(__dirname + '/public/libraries'));
 app.get('/', function(req, res){
