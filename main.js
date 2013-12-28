@@ -36,27 +36,26 @@ io.sockets.on('connection', function (socket) {
     socket.on('start', function (data) {
         var myObj2 = {};
         myObj2.list = function(callback){
-            exec("cd /root/broadcaster2 && meteor --settings settings.json", function (error, stdout, stderr) {
-                callback(stderr);
-            });
         }
         myObj2.list(function (stdout) {
             socket.emit('debug', stdout);
         });
     });
-        for(i=0;i<config.startup.length;i++){
-            app.get('/'+config.startup[i].page, function(req, res){
-            	for(j=0;j<config.startup.length;j++){
+        for(i=0;i<config.routes.length;i++){
+            app.get('/'+config.routes[i].page, function(req, res){
+            	for(j=0;j<config.routes.length;j++){
         			var path = req.route.path;
         			var match = path.substring(path.indexOf('/')+1);
-        			if(config.startup[j].page == match){
-        			nexpect.spawn(config.startup[j].command, { cwd:config.startup[j].cwd}).run(function (err, out, socket) {
+        			if(config.routes[j].page == match){
+        			nexpect.spawn(config.routes[j].command, { cwd:config.routes[j].cwd}).run(function (err, out, socket) {
         			});
-        			res.send("<script>window.location='http://'+window.location.hostname+':"+config.startup[j].port+"'</script>");
+        			res.send("<script>window.location='http://'+window.location.hostname+':"+config.routes[j].port+"'</script>");
         			}
         		}
         	});
         }
-
+        for(i=0;i<config.startup.length;i++){
+            nexpect.spawn(config.routes[i].command, { cwd:config.routes[i].cwd}).run(function (err, out, socket) {});
+        }
 
 });
