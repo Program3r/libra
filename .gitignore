@@ -1,4 +1,5 @@
 node_modules
 *.save*
 *.log
-*config.js
+config.js
+*.pid
