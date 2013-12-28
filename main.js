@@ -32,7 +32,7 @@ io.sockets.on('connection', function (socket) {
     myObj.list(function (stdout) {
         socket.emit('scan', stdout);
     });
-    
+
     socket.on('start', function (data) {
         var myObj2 = {};
         myObj2.list = function(callback){

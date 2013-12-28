@@ -5,8 +5,8 @@ NODE_BIN_DIR="/root/.nvm/v0.8.19/bin"
 NODE_PATH="/root/.nvm/v0.8.19/lib/node_modules"
 APPLICATION_DIRECTORY="/root/local/libra"
 APPLICATION_START="main.js"
-PIDFILE="/root/local/libra/bc.pid"
-LOGFILE="/root/local/libra/bc.log"
+PIDFILE="/root/local/libra/libra.pid"
+LOGFILE="/root/local/libra/libra.log"
 
 
 PATH=$NODE_BIN_DIR:$PATH
