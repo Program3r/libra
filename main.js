@@ -60,7 +60,7 @@ io.sockets.on('connection', function (socket) {
         	});
         }
         for(i=0;i<config.startup.length;i++){
-            nexpect.spawn(config.routes[i].command, { cwd:config.routes[i].cwd}).run(function (err, out, socket) {});
+            nexpect.spawn(config.startup[i].command, { cwd:config.startup[i].cwd}).run(function (err, out, socket) {});
         }
 
 });
