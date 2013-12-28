@@ -1,5 +1,4 @@
 #!/bin/bash
-$PWD=${PWD##*/}
 NAME="Libra"
 NODE_BIN_DIR="/root/.nvm/v0.8.19/bin"
 NODE_PATH="/root/.nvm/v0.8.19/lib/node_modules"
