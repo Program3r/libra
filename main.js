@@ -6,6 +6,7 @@ var app = express.createServer(), io = io.listen(app);
 
 var path = require('path'),nexpect = require('nexpect');
 
+var exec = require('child_process').exec;
 
 
 app.use('/lib', express.static(__dirname + '/public/libraries'));
@@ -13,16 +14,38 @@ app.get('/', function(req, res){
   //res.send('<Script src="/lib/clode/clode.js"></script>');
   var commandLinks = "";
   for(i=0;i<config.routes.length;i++){
-     commandLinks+="<a href=''>"+config.routes[i].page+"</a>";
+
+      var extTarget = config.routes[i].externalLink;
+
+      if(extTarget == true){
+          var target = "_"+config.routes[i].page;
+      }else{
+          var target = "_parent";
+      }
+     commandLinks+="<a href='"+config.routes[i].page+"' target='"+target+"'>"+config.routes[i].page+"</a><br>";
   };
   res.send(commandLinks);
 });
 
-
+for(i=0;i<config.routes.length;i++){
+	app.get('/'+config.routes[i].page, function(req, res){
+		for(j=0;j<config.routes.length;j++){
+			var path = req.route.path;
+			var match = path.substring(path.indexOf('/')+1);
+			if(config.routes[j].page == match){
+			nexpect.spawn(config.routes[j].command, { cwd:config.routes[j].cwd}).run(function (err, out, socket) {
+			});
+			res.send("<script>window.location='http://'+window.location.hostname+':"+config.routes[j].port+"'</script>");
+			}
+		}
+	});
+}
+for(i=0;i<config.startup.length;i++){
+	nexpect.spawn(config.startup[i].command, { cwd:config.startup[i].cwd}).run(function (err, out, socket) {});
+}
 
 app.listen(process.env.PORT);
 
-var exec = require('child_process').exec;
 
 
 io.sockets.on('connection', function (socket) {
@@ -46,21 +69,8 @@ io.sockets.on('connection', function (socket) {
             socket.emit('debug', stdout);
         });
     });
-        for(i=0;i<config.routes.length;i++){
-            app.get('/'+config.routes[i].page, function(req, res){
-            	for(j=0;j<config.routes.length;j++){
-        			var path = req.route.path;
-        			var match = path.substring(path.indexOf('/')+1);
-        			if(config.routes[j].page == match){
-        			nexpect.spawn(config.routes[j].command, { cwd:config.routes[j].cwd}).run(function (err, out, socket) {
-        			});
-        			res.send("<script>window.location='http://'+window.location.hostname+':"+config.routes[j].port+"'</script>");
-        			}
-        		}
-        	});
-        }
-        for(i=0;i<config.startup.length;i++){
-            nexpect.spawn(config.startup[i].command, { cwd:config.startup[i].cwd}).run(function (err, out, socket) {});
-        }
-
 });
+
+
+
+
