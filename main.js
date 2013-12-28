@@ -11,11 +11,14 @@ var path = require('path'),nexpect = require('nexpect');
 app.use('/lib', express.static(__dirname + '/public/libraries'));
 app.get('/', function(req, res){
   res.send('<Script src="/lib/clode/clode.js"></script>');
+  for(i=0;i<config.routes.length;i++){
+     res.send(config.routes[i].page);
+  };
 });
 
 
 
-app.listen(8080);
+app.listen(process.env.PORT);
 
 var exec = require('child_process').exec;
 

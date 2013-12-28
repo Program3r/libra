@@ -13,7 +13,7 @@ PATH=$NODE_BIN_DIR:$PATH
 
 start() {
     echo "Starting $NAME"
-    NODE_ENV=production forever --pidFile $PIDFILE --sourceDir $APPLICATION_DIRECTORY \
+    NODE_ENV=production PORT=8080 forever --pidFile $PIDFILE --sourceDir $APPLICATION_DIRECTORY \
         -a -l $LOGFILE --minUptime 5000 --spinSleepTime 2000 \
         start $APPLICATION_START &
     RETVAL=$?
