@@ -14,5 +14,5 @@
 	"scripts":{
 		"start":"node server.js"
 	},
-	"engine": "node >= 0.6.6"
+	"engine": "0.8.19"
 }

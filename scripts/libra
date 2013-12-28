@@ -1,0 +1,62 @@
+#!/bin/bash
+$PWD=${PWD##*/}
+NAME="Libra"
+NODE_BIN_DIR="/root/.nvm/v0.8.19/bin"
+NODE_PATH="/root/.nvm/v0.8.19/lib/node_modules"
+APPLICATION_DIRECTORY="/root/local/libra"
+APPLICATION_START="main.js"
+PIDFILE="/root/local/libra/bc.pid"
+LOGFILE="/root/local/libra/bc.log"
+
+
+PATH=$NODE_BIN_DIR:$PATH
+
+start() {
+    echo "Starting $NAME"
+    NODE_ENV=production forever --pidFile $PIDFILE --sourceDir $APPLICATION_DIRECTORY \
+        -a -l $LOGFILE --minUptime 5000 --spinSleepTime 2000 \
+        start $APPLICATION_START &
+    RETVAL=$?
+}
+
+stop() {
+    if [ -f $PIDFILE ]; then
+        echo "Shutting down $NAME"
+        rm -f $PIDFILE
+        RETVAL=$?
+    else
+        echo "$NAME is not running."
+        RETVAL=0
+    fi
+}
+
+restart() {
+    echo "Restarting $NAME"
+    stop
+    start
+}
+
+status() {
+    forever list
+    RETVAL=$?
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status
+        ;;
+    restart)
+        restart
+        ;;
+    *)
+        echo "Usage: {start|stop|status|restart}"
+        exit 1
+        ;;
+esac
+exit $RETVAL

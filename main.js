@@ -15,7 +15,7 @@ app.get('/', function(req, res){
 
 
 
-app.listen(8082);
+app.listen(8080);
 
 var exec = require('child_process').exec;
 
