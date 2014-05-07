@@ -1,61 +1,99 @@
-#!/bin/bash
+#!/bin/bash -e
+
+
+### BEGIN INIT INFO
+
+# Provides:          Libra
+
+# Required-Start:    $local_fs $remote_fs $network $syslog
+
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+
+# Default-Start:     2 3 4 5
+
+# Default-Stop:      0 1 6
+
+# Short-Description: starts nodejs application as a service
+
+### END INIT INFO
+
+
+fatal() { echo "FATAL [$(basename $0)]: $@" 1>&2; exit 1; }
+
+warning() { echo "WARNING [$(basename $0)]: $@"; }
+
+
+
+
+
 NAME="Libra"
-NODE_BIN_DIR="/root/.nvm/v0.8.19/bin"
-NODE_PATH="/root/.nvm/v0.8.19/lib/node_modules"
+
+DESC="Libra"
+
+NODE_BIN_DIR="/root/.nvm/v0.10.25/bin"
+
+NODE_PATH="/root/.nvm/v0.10.25/lib/node_modules"
+
 APPLICATION_DIRECTORY="/root/local/libra"
-APPLICATION_START="main.js"
+
+APPLICATION_START="libra.js"
+
 PIDFILE="/root/local/libra/libra.pid"
+
 LOGFILE="/root/local/libra/libra.log"
 
-
-PATH=$NODE_BIN_DIR:$PATH
-
-start() {
-    echo "Starting $NAME"
-    NODE_ENV=production PORT=8080 forever --pidFile $PIDFILE --sourceDir $APPLICATION_DIRECTORY \
-        -a -l $LOGFILE --minUptime 5000 --spinSleepTime 2000 \
-        start $APPLICATION_START &
-    RETVAL=$?
-}
-
-stop() {
-    if [ -f $PIDFILE ]; then
-        echo "Shutting down $NAME"
-        rm -f $PIDFILE
-        RETVAL=$?
-    else
-        echo "$NAME is not running."
-        RETVAL=0
-    fi
-}
-
-restart() {
-    echo "Restarting $NAME"
-    stop
-    start
-}
-
-status() {
-    forever list
-    RETVAL=$?
-}
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$NODE_BIN_DIR"
 
 case "$1" in
+
     start)
-        start
+
+        NODE_ENV=production PORT=8080 $NODE_BIN_DIR/forever --pidFile $PIDFILE --sourceDir $APPLICATION_DIRECTORY -a -l $LOGFILE --minUptime 5000 --spinSleepTime 2000 start $APPLICATION_START &
         ;;
+
     stop)
-        stop
+
+		if [ -f $PIDFILE ]; then
+
+			echo "Shutting down $NAME"
+
+			rm -f $PIDFILE
+
+			RETVAL=$?
+
+		else
+
+			echo "$NAME is not running."
+
+			RETVAL=0
+
+		fi
+
         ;;
-    status)
-        status
-        ;;
+
     restart)
-        restart
+
+        $0 stop
+
+        $0 start
+
         ;;
-    *)
-        echo "Usage: {start|stop|status|restart}"
-        exit 1
+
+    status)
+	$NODE_BIN_DIR/forever list
+
         ;;
+
+  *)
+
+	  echo "Usage: $NAME {start|stop|restart|status}" >&2
+
+	  exit 1
+
+	  ;;
+
 esac
-exit $RETVAL
+
+
+exit 0
+

@@ -1,7 +1,31 @@
+DIR=$PWD
+update-rc.d remove libra
+rm -r /etc/init.d/libra
+mkdir /root/local/db/libra
+#Make sure we have a folder to install to
+mkdir ~/local
+cd ~/local
+#Create temporary directory to store an already configure Libra instance
+mkdir ~/LIBRA-TMP
+cp ~/local/libra/config.js ~/LIBRA-TMP
+#Remove old instance if it exists and replace
+rm -r ~/local/libra
+git clone https://github.com/Program3r/libra.git
+#If you already have a config.js in this directory, we use that. (If cloned already, you can rename sample-config.js to config.js and make modifications)
+cp $DIR/config.js ~/local/libra/config.js
+cd ~/local/libra
+#Uses nvm for node management, and points to the node version.
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh | sh
+. ~/.nvm/nvm.sh
+nvm install -v 0.10.25
+#Run Libra with Forever
+nvm use v0.10.25
 npm install forever -g
 npm install
+#Run Libra at system boot.
 cp scripts/libra /etc/init.d/libra
 chmod a+x /etc/init.d/libra
 update-rc.d libra defaults
-cp -n sample-config.js config.js
-/etc/init.d/libra start
+mv ~/LIBRA-TMP/config.js ~/local/libra/
+rm -r ~/LIBRA-TMP
+/etc/init.d/libra

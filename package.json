@@ -2,17 +2,22 @@
 	"name": "Libra",
 	"description": "",
 	"author": "Joshua Chavez <josh@findjosh.com>",
-	"version": "0.0.1",
+	"version": "0.1.2",
+	"preferGlobal": false,
 	"dependencies": {
-		"express":"2.5.2",
-		"fibers":"1.0.1",
+		"express":"4.1.1",
 		"socket.io":"0.9.16",
-		"supervisor":"0.5.3",
-		"nexpect":"0.2.4"
+		"pty.js":"0.2.4",
+		"forever-monitor":"1.2.3",
+		"tingodb":"0.2.1"
 	},
+	"repository": {
+        "type": "git",
+        "url": "https://github.com/Program3r/libra.git"
+    },
 	"license":"MIT",
 	"scripts":{
-		"start":"node server.js"
+		"start":"node libra.js"
 	},
-	"engine": "0.8.19"
+	"engine": "0.10.24"
 }
