@@ -17,7 +17,7 @@ cd ~/local/libra
 #Uses nvm for node management, and points to the node version.
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh | sh
 . ~/.nvm/nvm.sh
-nvm install -v 0.10.25
+nvm install v0.10.25
 #Run Libra with Forever
 nvm use v0.10.25
 npm install forever -g
