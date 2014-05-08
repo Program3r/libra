@@ -1,9 +1,8 @@
 DIR=$PWD
-update-rc.d remove libra
-rm -r /etc/init.d/libra
-mkdir /root/local/db/libra
 #Make sure we have a folder to install to
 mkdir ~/local
+mkdir ~/local/db
+mkdir ~/local/db/libra
 cd ~/local
 #Create temporary directory to store an already configure Libra instance
 mkdir ~/LIBRA-TMP
