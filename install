@@ -4,15 +4,9 @@ mkdir ~/local
 mkdir ~/local/db
 mkdir ~/local/db/libra
 cd ~/local
-#Create temporary directory to store an already configure Libra instance
-mkdir ~/LIBRA-TMP
-cp ~/local/libra/config.js ~/LIBRA-TMP
-#Remove old instance if it exists and replace
-rm -r ~/local/libra
 git clone https://github.com/Program3r/libra.git
-#If you already have a config.js in this directory, we use that. (If cloned already, you can rename sample-config.js to config.js and make modifications)
-cp $DIR/config.js ~/local/libra/config.js
 cd ~/local/libra
+cp sample-config.js config.js
 #Uses nvm for node management, and points to the node version.
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.6.1/install.sh | sh
 . ~/.nvm/nvm.sh
@@ -25,6 +19,4 @@ npm install
 cp scripts/libra /etc/init.d/libra
 chmod a+x /etc/init.d/libra
 update-rc.d libra defaults
-mv ~/LIBRA-TMP/config.js ~/local/libra/
-rm -r ~/LIBRA-TMP
-/etc/init.d/libra
+/etc/init.d/libra start &&
