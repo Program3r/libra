@@ -9,5 +9,3 @@ setInterval(function(){
         }
     });
 }, 10000);
-
-//Minor Change Test 2
