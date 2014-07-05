@@ -13,7 +13,8 @@
 		"gith":"1.0.4",
 		"haibu":"0.10.3",
 		"getport":"0.1.0",
-		"detectionizr":"0.1.5"
+		"detectionizr":"0.1.5",
+		"gift":"0.4.2"
 	},
 	"repository": {
         "type": "git",
