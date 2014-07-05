@@ -9,7 +9,10 @@ function jsonConcat(o1, o2) {
     return o1;
 }
 process.on('uncaughtException', function (err) {
-  console.log(err);
+  //console.log(err);
+})
+process.on('stdout', function (err) {
+  //console.log(err);
 })
 
 for (i = 0; i < config.startup.length; i++) {

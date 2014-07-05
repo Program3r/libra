@@ -1,7 +1,7 @@
 {
 	"name": "Libra",
 	"description": "",
-	"author": "Joshua Chavez <josh@findjosh.com>",
+	"author": "Program3r",
 	"version": "0.1.2",
 	"preferGlobal": false,
 	"dependencies": {
@@ -9,7 +9,11 @@
 		"socket.io":"0.9.16",
 		"pty.js":"0.2.4",
 		"forever-monitor":"1.2.3",
-		"tingodb":"0.2.1"
+		"tingodb":"0.2.1",
+		"gith":"1.0.4",
+		"haibu":"0.10.3",
+		"getport":"0.1.0",
+		"detectionizr":"0.1.5"
 	},
 	"repository": {
         "type": "git",
@@ -19,5 +23,5 @@
 	"scripts":{
 		"start":"node libra.js"
 	},
-	"engine": "0.10.24"
+	"engine": "0.10.25"
 }
