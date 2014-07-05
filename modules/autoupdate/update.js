@@ -5,7 +5,7 @@ setInterval(function(){
         console.log(data)
         //Must be a live instance that needs update check.
         if(data.clean == true){
-            repo.pull("origin", "auto-update", function(err, status, one){
+            repo.pull("origin", "auto-stage", function(err, status, one){
                 console.log(err, status, one)
             });
         }
