@@ -4,3 +4,4 @@ node_modules
 config.js
 *.pid
 services/*.json
+.settings

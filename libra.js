@@ -3,6 +3,6 @@
 //Support HTTP API
 //require("./modules/http-api/http-api.js");
 //Supporting old scripts that used a config.js file
-require("./modules/services/services.js");
+require("./modules/services/haibu-services.js");
 
 require("./modules/autoupdate/update.js");
