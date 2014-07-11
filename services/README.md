@@ -2,11 +2,20 @@ You can put .JSON files here with configs for forever-monitor, more to come late
 
 FOREVER-MONITOR EXAMPLE
 {
+    "name":"",
+    "user":"",
     "command":"/root/.nvm/v0.8.19/bin/node",
-    "type":"forever",
-    "file":"/path/to/server.js",
-    "port":3111,
-    "max":3,
+    "type":"forever-monitor",
+    "file":"",
+    "port":3333,
+    "max":10,
     "silent":true,
-    "options":["-p", "3119", "-l", "0.0.0.0", "-w", "/root"]
+    "options":[],
+    "repository":{
+        "type":"",
+        "directory":""
+    },
+    "scripts":{
+        "start":"server.js"
+    }
 }
