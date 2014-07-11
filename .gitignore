@@ -3,5 +3,4 @@ node_modules
 *.log
 config.js
 *.pid
-services/*.json
 .settings
