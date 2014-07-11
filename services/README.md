@@ -1,7 +1,5 @@
 You can put .JSON files here with configs for forever-monitor, more to come later.
 
-
-
 FOREVER-MONITOR EXAMPLE
 {
     "command":"/root/.nvm/v0.8.19/bin/node",
